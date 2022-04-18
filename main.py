@@ -6,8 +6,8 @@ def check_row(row):
     for r in range(size):
         sum = 0
         for r1 in range(size):
-            if r==r1:
-                break
+            if r == r1:
+                continue
             else:
                 sum += row[r1]
         if sum < row[r]:
