@@ -16,7 +16,22 @@ def check_row(row):
 
 def dominant_diagonal():
     for n in range(size):
-        check_row(matrixA[i])
+        check_row(matrixA[n])
+    for n in range(size):
+        if mat_dict[n] == 0:
+            print("There is not a dominant diagonal in this matrix")
+            return False
+    return True
+
+def arrange_matrix():
+    if dominant_diagonal() == True:
+        matrixA_help = []
+        for r in range(size):
+            matrixA_help.append(mat_dict[r])
+        matrixA = matrixA_help
+    return matrixA
+
+
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
@@ -30,6 +45,7 @@ if __name__ == '__main__':
     size = 3
     mat_dict = {}
     for i in range(size):
-        mat_dict[i] = []
+        mat_dict[i] = 0
+    print(arrange_matrix())
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
