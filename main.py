@@ -2,7 +2,7 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-def check_row(row):
+def check_row(row, vector):
     for r in range(size):
         sum = 0
         for r1 in range(size):
@@ -12,11 +12,12 @@ def check_row(row):
                 sum += row[r1]
         if sum < row[r]:
             mat_dict[r] = row
+            vec_dict[r] = vector
             return
 
 def dominant_diagonal():
     for n in range(size):
-        check_row(matrixA[n])
+        check_row(matrixA[n], vectorB[n])
     for n in range(size):
         if mat_dict[n] == 0:
             print("There is not a dominant diagonal in this matrix")
@@ -26,10 +27,51 @@ def dominant_diagonal():
 def arrange_matrix():
     if dominant_diagonal() == True:
         matrixA_help = []
+        vectorB_help = []
         for r in range(size):
             matrixA_help.append(mat_dict[r])
+            vectorB_help.append(vec_dict[r])
         matrixA = matrixA_help
-    return matrixA
+        vectorB = vectorB_help
+    return
+def yakoby(mat1, size, vec):
+    e = 0.001
+    for row in range(size):
+        for col in range(size):
+            if row == col:
+                continue
+            mat1[row][col] = -1 * mat1[row][col] / mat1[row][row]
+        vec[row] = vec[row] / mat1[row][row]
+    the_privous = []
+    for i in range(size):
+        the_privous.append(0)
+    print(the_privous)
+    for row in range(size):
+        sum = 0
+        for col in range(size):
+            if row == col:
+                continue
+            sum += mat1[row][col] * the_privous[col]
+        sum += vec[row]
+        the_privous.append(helper[row])
+        helper[row] = sum
+    print(helper)
+    index = 1
+    while abs(helper[2] - the_privous[index * size - 1]) > e:
+
+        for row in range(size):
+            sum = 0
+            for col in range(size):
+                if row == col:
+                    continue
+                sum += mat1[row][col] * the_privous[(index * size) + col]
+            sum += vec[row]
+            helper[row] = sum
+        index += 1
+        for i in range(size):
+            the_privous.append(helper[i])
+        print(helper)
+    return
 
 
 def print_hi(name):
@@ -39,13 +81,17 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-    matrixA = [[4, 2, 0], [2, 10, 4], [0, 4, 5]]
-    vectorB = [[2], [6], [5]]
+    matrixA = [[2, 4, 0], [2, 10, 4], [0, 4, 5]]
+    vectorB = [2, 6, 5]
     size = 3
     mat_dict = {}
+    vec_dict = {}
+    helper = []
     for i in range(size):
-        mat_dict[i] = 0
-    print(arrange_matrix())
+        mat_dict[i], vec_dict[i],  = 0, 0
+        helper.append(0)
+    arrange_matrix()
+
+    yakoby(matrixA, size, vectorB)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
