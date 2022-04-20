@@ -34,7 +34,9 @@ def arrange_matrix():
         matrixA = matrixA_help
         vectorB = vectorB_help
     return
-def yakoby(mat1, size, vec):
+
+
+def yaakoby(mat1, vec):
     e = 0.001
     for row in range(size):
         for col in range(size):
@@ -42,34 +44,32 @@ def yakoby(mat1, size, vec):
                 continue
             mat1[row][col] = -1 * mat1[row][col] / mat1[row][row]
         vec[row] = vec[row] / mat1[row][row]
-    the_privous = []
-    for i in range(size):
-        the_privous.append(0)
-    print(the_privous)
+    the_previous = []
+    for m in range(size):
+        the_previous.append(0)
+    print(the_previous)
     for row in range(size):
         sum = 0
         for col in range(size):
             if row == col:
                 continue
-            sum += mat1[row][col] * the_privous[col]
+            sum += mat1[row][col] * the_previous[col]
         sum += vec[row]
-        the_privous.append(helper[row])
+        the_previous.append(helper[row])
         helper[row] = sum
-    print(helper)
     index = 1
-    while abs(helper[2] - the_privous[index * size - 1]) > e:
-
+    while abs(helper[size-1] - the_previous[index * size - 1]) > e:
         for row in range(size):
             sum = 0
             for col in range(size):
                 if row == col:
                     continue
-                sum += mat1[row][col] * the_privous[(index * size) + col]
+                sum += mat1[row][col] * the_previous[(index * size) + col]
             sum += vec[row]
             helper[row] = sum
         index += 1
-        for i in range(size):
-            the_privous.append(helper[i])
+        for t in range(size):
+            the_previous.append(helper[t])
         print(helper)
     return
 
@@ -91,7 +91,6 @@ if __name__ == '__main__':
         mat_dict[i], vec_dict[i],  = 0, 0
         helper.append(0)
     arrange_matrix()
-
-    yakoby(matrixA, size, vectorB)
+    yaakoby(matrixA, vectorB)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
