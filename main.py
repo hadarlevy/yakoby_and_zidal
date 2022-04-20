@@ -1,5 +1,4 @@
 # This is a sample Python script.
-
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 def check_row(row, vector):
@@ -47,7 +46,7 @@ def yaakoby(mat1, vec):
     the_previous = []
     for m in range(size):
         the_previous.append(0)
-    print(the_previous)
+    print(f'{0}: {the_previous}')
     for row in range(size):
         sum = 0
         for col in range(size):
@@ -67,13 +66,54 @@ def yaakoby(mat1, vec):
                 sum += mat1[row][col] * the_previous[(index * size) + col]
             sum += vec[row]
             helper[row] = sum
+
+        for t in range(size):
+            the_previous.append(helper[t])
+        print(f'{index}: {helper}')
+        index += 1
+    for i in range(size):
+        print(f'x{i+1}: {helper[i]}')
+    return
+
+def zidel(mat1, vec):
+    e = 0.001
+    for row in range(size):
+        for col in range(size):
+            if row == col:
+                continue
+            mat1[row][col] = -1 * mat1[row][col] / mat1[row][row]
+        vec[row] = vec[row] / mat1[row][row]
+    the_previous = []
+    for m in range(size):
+        the_previous.append(0)
+    print("0:", the_previous)
+    for row in range(size):
+        sum = 0
+        for col in range(size):
+            if row == col:
+                continue
+            sum += mat1[row][col] * helper[col]
+        sum += vec[row]
+        helper[row] = sum
+    index = 0
+
+    while abs(helper[size-1] - the_previous[index * size - 1]) > e:
+        print(f'{index+1}: {helper}')
+        for row in range(size):
+            sum = 0
+            for col in range(size):
+                if row == col:
+                    continue
+                sum += mat1[row][col] * helper[col]
+            sum += vec[row]
+            helper[row] = sum
         index += 1
         for t in range(size):
             the_previous.append(helper[t])
-        print(helper)
+    print(f'{index+1}: {helper}')
+    for i in range(size):
+        print(f'x{i+1}: {helper[i]}')
     return
-
-def zidel():
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
@@ -81,7 +121,7 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    matrixA = [[2, 4, 0], [2, 10, 4], [0, 4, 5]]
+    matrixA = [[4, 2, 0], [2, 10, 4], [0, 4, 5]]
     vectorB = [2, 6, 5]
     size = 3
     mat_dict = {}
@@ -92,5 +132,6 @@ if __name__ == '__main__':
         helper.append(0)
     arrange_matrix()
     yaakoby(matrixA, vectorB)
+    #zidel(matrixA, vectorB)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
