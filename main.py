@@ -36,7 +36,7 @@ def arrange_matrix():
 
 
 def yaakoby(mat1, vec):
-    e = 0.001
+    e = 0.00001
     for row in range(size):
         for col in range(size):
             if row == col:
@@ -71,12 +71,13 @@ def yaakoby(mat1, vec):
             the_previous.append(helper[t])
         print(f'{index}: {helper}')
         index += 1
+    print(f'------------------Results--------------------')
     for i in range(size):
         print(f'x{i+1}: {helper[i]}')
     return
 
 def zidel(mat1, vec):
-    e = 0.001
+    e = 0.00001
     for row in range(size):
         for col in range(size):
             if row == col:
@@ -128,10 +129,14 @@ if __name__ == '__main__':
     vec_dict = {}
     helper = []
     for i in range(size):
-        mat_dict[i], vec_dict[i],  = 0, 0
+        mat_dict[i], vec_dict[i] = 0, 0
         helper.append(0)
+
+    x = int(input("Press your choice: 1- for Yaakoby method 2- for Zidel method\n"))
     arrange_matrix()
-    yaakoby(matrixA, vectorB)
-    #zidel(matrixA, vectorB)
+    if x == 1:
+        yaakoby(matrixA, vectorB)
+    if x == 2:
+        zidel(matrixA, vectorB)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
