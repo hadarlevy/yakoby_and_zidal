@@ -123,7 +123,7 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    matrixA = [[4, 2, 1], [2, 10, 4], [0, 4, 5]]
+    matrixA = [[4, 2, 0], [2, 10, 4], [0, 4, 5]]
     vectorB = [2, 6, 5]
     size = 3
     t_mat = tuple(matrixA[0])
@@ -143,10 +143,10 @@ if __name__ == '__main__':
         zidel(matrixA, vectorB)
     if check == False:
         for i in range(size):
-            sum1 += t_mat[i] * helper[i]
+            sum1 += round(t_mat[i] * helper[i])
         if sum1 != t_vec:
             print("This matrix does not converge")
         else:
-            print("Although there is no dominant diagonal this matrix converges")
+            print("Although there is no dominant diagonal, This matrix converges")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
