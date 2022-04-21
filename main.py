@@ -32,7 +32,8 @@ def arrange_matrix():
             vectorB_help.append(vec_dict[r])
         matrixA = matrixA_help
         vectorB = vectorB_help
-    return
+        return True
+    return False
 
 
 def yaakoby(mat1, vec):
@@ -122,21 +123,30 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    matrixA = [[4, 2, 0], [2, 10, 4], [0, 4, 5]]
+    matrixA = [[4, 2, 1], [2, 10, 4], [0, 4, 5]]
     vectorB = [2, 6, 5]
     size = 3
+    t_mat = tuple(matrixA[0])
+    t_vec = vectorB[0]
     mat_dict = {}
     vec_dict = {}
     helper = []
+    sum1 = 0.0
     for i in range(size):
         mat_dict[i], vec_dict[i] = 0, 0
         helper.append(0)
-
     x = int(input("Press your choice: 1- for Yaakoby method 2- for Zidel method\n"))
-    arrange_matrix()
+    check = arrange_matrix()
     if x == 1:
         yaakoby(matrixA, vectorB)
     if x == 2:
         zidel(matrixA, vectorB)
+    if check == False:
+        for i in range(size):
+            sum1 += t_mat[i] * helper[i]
+        if sum1 != t_vec:
+            print("This matrix does not converge")
+        else:
+            print("Although there is no dominant diagonal this matrix converges")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
