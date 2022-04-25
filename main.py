@@ -113,6 +113,7 @@ def zidel(mat1, vec):
         for t in range(size):
             the_previous.append(helper[t])
     print(f'{index+1}: {helper}')
+    print(f'------------------Results--------------------')
     for i in range(size):
         print(f'x{i+1}: {helper[i]}')
     return
